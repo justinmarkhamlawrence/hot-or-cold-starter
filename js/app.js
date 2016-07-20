@@ -1,8 +1,7 @@
-
 $(document).ready(function(){
 	
   var secretNum = parseInt(Math.random() * (100) + 1);
-  var counterNum = 0;
+  var counterNum;
   var userEntered = [];
   
   function newGame() { 
@@ -14,9 +13,8 @@ $(document).ready(function(){
     $('#guessList').text('');
   }
 
-  $('.new').click(function() {
-    newGame();
-  }); 
+  $('.new').click(newGame); 
+    
 
 	/*--- Display information modal box ---*/
   	$(".what").click(function(){
@@ -34,8 +32,7 @@ $(document).ready(function(){
         counterNum = counterNum + 1;
         $('#count').text(counterNum);
         var userNum = parseInt($("#userGuess").val());
-        // console.log('Usernum is ' + userNum);
-        if (userNum > 100|| isNaN(userNum) || userNum === undefined) {
+        if (userNum < 1 || userNum > 100|| isNaN(userNum) || userNum === undefined) {
           alert('Please enter an integer between 1 and 100');
           return;
         }
@@ -72,7 +69,7 @@ $(document).ready(function(){
  
         var guessAdd = '' + '<li>' + userNum + '</li>';
         $(guessAdd).appendTo("#guessList");
-        $(this)[0].reset();
+        $('#userGuess').val('');
     })
 
 });
